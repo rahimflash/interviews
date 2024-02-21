@@ -5,7 +5,7 @@ metadata:
   name: tiaapp
   namespace: tiacourse
 spec:
-  project: default
+  project: tiaproject
   source:
     repoURL: https://github.com/rahimflash/interviews.git   
     targetRevision: main
