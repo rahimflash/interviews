@@ -9,10 +9,11 @@ spec:
   source:
     repoURL: https://github.com/rahimflash/interviews.git   
     targetRevision: main
-    path: /task/applications/k8s/hello-deployment.yaml
+    path: task/applications/k8s
   destination:
     server: https://kubernetes.default.svc   
     namespace: tiacourse
   syncPolicy:
     automated:
-      prune: true   
+      prune: true 
+      selfHeal: true
