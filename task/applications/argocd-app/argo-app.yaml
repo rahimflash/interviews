@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/rahimflash/interviews.git   
     targetRevision: main
-    path: /task/applications/argocd-app/
+    path: /task/applications/argocd-app
   destination:
     server: https://kubernetes.default.svc   
     namespace: tiacourse
