@@ -1,0 +1,197 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-manager-role
+  managedFields:
+    - manager: argocd
+      operation: Update
+      apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:rules: {}
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/argocd-manager-role
+rules:
+  - verbs:
+      - '*'
+    apiGroups:
+      - '*'
+    resources:
+      - '*'
+  - verbs:
+      - '*'
+    nonResourceURLs:
+      - '*'
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-role
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"name":"argocd-role"},"rules":[{"apiGroups":[""],"resources":[""],"verbs":[""]},{"nonResourceURLs":[""],"verbs":["*"]}]}
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:rules: {}
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/argocd-role
+rules:
+  - verbs:
+      - '*'
+    apiGroups:
+      - '*'
+    resources:
+      - '*'
+  - verbs:
+      - '*'
+    nonResourceURLs:
+      - '*'
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-migration-api
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"name":"argocd-migration-api"},"rules":[{"apiGroups":[""],"resources":[""],"verbs":[""]},{"nonResourceURLs":[""],"verbs":["*"]}]}
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:rules: {}
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/argocd-migration-api
+rules:
+  - verbs:
+      - '*'
+    apiGroups:
+      - '*'
+    resources:
+      - '*'
+  - verbs:
+      - '*'
+    nonResourceURLs:
+      - '*'
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-manager-role-binding
+  managedFields:
+    - manager: argocd
+      operation: Update
+      apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:roleRef: {}
+        f:subjects: {}
+  selfLink: >-
+    /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/argocd-manager-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: argocd-manager
+    namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-manager-role
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-role-binding
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"argocd-role-binding"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"argocd-role"},"subjects":[{"kind":"ServiceAccount","name":"argocd-manager","namespace":"kube-system"}]}
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:roleRef: {}
+        f:subjects: {}
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/argocd-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: argocd-manager
+    namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-role
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-migration-api
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"argocd-migration-api"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"argocd-migration-api"},"subjects":[{"kind":"ServiceAccount","name":"argocd-migration-api","namespace":"tiacourses"}]}
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:roleRef: {}
+        f:subjects: {}
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/argocd-migration-api
+subjects:
+  - kind: ServiceAccount
+    name: argocd-migration-api
+    namespace: tiacourse
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-migration-api
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: service-list-role
+rules:
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: service-list-role-binding
+subjects:
+- kind: ServiceAccount
+  name: argocd-application-controller
+  namespace: tiacourse
+roleRef:
+  kind: ClusterRole
+  name: service-list-role
+  apiGroup: rbac.authorization.k8s.io

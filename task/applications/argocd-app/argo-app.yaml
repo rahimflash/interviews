@@ -2,13 +2,19 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: tiaapp
-  namespace: tiacourse
 spec:
-  project: tiaproject
-  source:
-    repoURL: https://github.com/rahimflash/interviews.git
-    targetRevision: main
-    path: task/applications/k8s
   destination:
-    server: https://kubernetes.default.svc
+    name: ''
     namespace: tiacourse
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: task/applications/k8s
+    repoURL: 'https://github.com/rahimflash/interviews.git'
+    targetRevision: main
+  sources: []
+  project: tiaproject
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
