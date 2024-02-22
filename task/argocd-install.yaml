@@ -22864,4 +22864,4 @@ spec:
     matchLabels:
       app.kubernetes.io/name: argocd-server
   policyTypes:
-  - Ingress
+  - Ingressps aux |grep -i kube
